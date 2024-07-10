@@ -16,6 +16,9 @@ import './src/policy.dart';
 class AwsS3 {
   /// Upload a file, returning the status code 200/204 on success.
   static Future<String> uploadFile({
+    /// Storage endpoint
+    required String domain,
+
     /// AWS access key
     required String accessKey,
 
@@ -57,7 +60,7 @@ class AwsS3 {
     if (useSSL) {
       httpStr += 's';
     }
-    final endpoint = '$httpStr://$bucket.s3.$region.amazonaws.com';
+    final endpoint = '$httpStr://$domain/$bucket';
 
     String? uploadKey;
 
@@ -143,6 +146,10 @@ class AwsS3 {
 
   /// Upload a Uint8List, returning the status code 200/204 on success.
   static Future<String> uploadUint8List({
+
+    /// Storage endpoint
+    required String domain,
+
     /// AWS access key
     required String accessKey,
 
@@ -185,7 +192,7 @@ class AwsS3 {
       httpStr += 's';
     }
 
-    final endpoint = '$httpStr://$bucket.s3.$region.amazonaws.com';
+    final endpoint = '$httpStr://$domain/$bucket';
 
     String? uploadKey;
 
